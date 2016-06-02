@@ -1,0 +1,151 @@
+
+<%
+    local image = getImage( index )
+    local theRoot = ".."
+    local others = "."
+    local mySize = "large"
+%>
+
+<!--#set var="pageTitle" value="$model.metadata.siteTitle.value" -->
+<!--#include virtual="/inc/head.shtml" -->
+<div id="container">
+<div class="photo-breadcrumb">
+<a href="/photos/">Photos</a> &gt; <a href="$gridPageLink">$model.metadata.siteTitle.value</a> &gt; 
+<%
+  if(image.metadata.title == nil or image.metadata.title == '') then
+    write(image.exportFilename)
+  else
+    write(image.metadata.title)
+  end
+  %>
+</div>
+
+  <%
+  if(image.metadata.title == nil or image.metadata.title == '') then
+    write("<h1>" .. image.exportFilename .. "</h1>")
+  else
+    write("<h1>" .. image.metadata.title .. "</h1>")
+  end
+  %>
+  <div class="photo-controls">
+      <lr:Pagination>
+        <lr:NextEnabled>
+          <div class="photo-controls-next"><a href="$link">Next --&gt;</a></div>
+        </lr:NextEnabled>
+        <lr:NextDisabled>
+          <div class="photo-controls-next disabled">Next --&gt;</div>
+        </lr:NextDisabled>
+        <lr:PreviousEnabled>
+          <div class="photo-controls-previous"><a href="$link">&lt;-- Previous</a></div>
+        </lr:PreviousEnabled>
+        <lr:PreviousDisabled>
+          <div class="photo-controls-previous disbaled">&lt;-- Previous</div>
+        </lr:PreviousDisabled>
+        <div class="photo-controls-index"><a href="$gridPageLink">Back to $model.metadata.siteTitle.value</a></div>
+      </lr:Pagination>
+  </div>
+  <div class="photo-display">
+    <img src="bin/images/large/<%= image.exportFilename %>.jpg" />
+  </div>
+  <div class="photo-details">
+  <%
+  if(image.metadata.caption ~= nil and image.metadata.caption ~= '') then
+    write("<h3>Photo description</h3><p>" .. image.metadata.caption .. "</p>")
+  end
+  %>
+    <h3>Photo details</h3>
+    <p class="photo-details-content">
+    <%
+      --[[for k, v in pairs( image.metadata ) do
+         write(k .. " - " .. v .. "<br />")
+      end]]
+
+      if(image.originalFileName ~= nil and image.originalFileName ~= '') then
+        write("<b>Original filename:</b> <i>" .. image.originalFileName .. "</i><br />")
+      end
+
+      if(image.metadata.date ~= nil and image.metadata.date ~= '') then
+        write("<b>Date and time:</b> <i>" .. image.metadata.date .. "</i><br />")
+      end
+
+      if(image.metadata.imageFileDimensions ~= nil and image.metadata.imageFileDimensions ~= '') then
+        write("<b>Original image dimensions:</b> <i>" .. image.metadata.imageFileDimensions .. "</i><br />")
+      end
+
+      if(image.metadata.croppedImageDimensions ~= nil and image.metadata.croppedImageDimensions ~= '') then
+        write("<b>Cropped image dimensions:</b> <i>" .. image.metadata.croppedImageDimensions .. "</i><br />")
+      end
+
+      if(image.metadata.make ~= nil and image.metadata.make ~= '') then
+        write("<b>Camera make:</b> <i>" .. image.metadata.make .. "</i><br />")
+      end
+
+      if(image.metadata.model ~= nil and image.metadata.model ~= '') then
+        write("<b>Camera model:</b> <i>" .. image.metadata.model .. "</i><br />")
+      end
+
+      if(image.metadata.software ~= nil and image.metadata.software ~= '') then
+        write("<b>Camera firmware version:</b> <i>" .. image.metadata.software .. "</i><br />")
+      end
+
+      if(image.metadata.lens ~= nil and image.metadata.lens ~= '') then
+        write("<b>Lens:</b> <i>" .. image.metadata.lens .. "</i><br />")
+      end
+
+      if(image.metadata.focalLength ~= nil and image.metadata.focalLength ~= '') then
+        write("<b>Focal length:</b> <i>" .. image.metadata.focalLength .. "</i><br />")
+      end
+
+      if(image.metadata.focalLength35mm ~= nil and image.metadata.focalLength35mm ~= '') then
+        write("<b>Focal length 35mm:</b> <i>" .. image.metadata.focalLength35mm .. "</i><br />")
+      end
+
+      if(image.metadata.subjectDistance ~= nil and image.metadata.subjectDistance ~= '') then
+        write("<b>Subject distance:</b> <i>" .. image.metadata.subjectDistance .. "</i><br />")
+      end
+
+      if(image.metadata.exposure ~= nil and image.metadata.exposure ~= '') then
+        write("<b>Exposure:</b> <i>" .. image.metadata.exposure .. "</i><br />")
+      end
+
+      if(image.metadata.exposureBiasValue ~= nil and image.metadata.exposureBiasValue ~= '') then
+        write("<b>Exposure bias:</b> <i>" .. image.metadata.exposureBiasValue .. "</i><br />")
+      end
+
+      if(image.metadata.ISOSpeedRating ~= nil and image.metadata.ISOSpeedRating ~= '') then
+        write("<b>ISO speed rating:</b> <i>" .. image.metadata.ISOSpeedRating .. "</i><br />")
+      end
+
+      if(image.metadata.meteringMode ~= nil and image.metadata.meteringMode ~= '') then
+        write("<b>Metering mode:</b> <i>" .. image.metadata.meteringMode .. "</i><br />")
+      end
+
+      if(image.metadata.flash ~= nil and image.metadata.flash ~= '') then
+        write("<b>Flash:</b> <i>" .. image.metadata.flash .. "</i><br />")
+      end
+
+    %>
+      
+    </p>
+  </div>
+
+  <div class="photo-controls">
+      <lr:Pagination>
+        <lr:NextEnabled>
+          <div class="photo-controls-next"><a href="$link">Next --&gt;</a></div>
+        </lr:NextEnabled>
+        <lr:NextDisabled>
+          <div class="photo-controls-next disabled">Next --&gt;</div>
+        </lr:NextDisabled>
+        <lr:PreviousEnabled>
+          <div class="photo-controls-previous"><a href="$link">&lt;-- Previous</a></div>
+        </lr:PreviousEnabled>
+        <lr:PreviousDisabled>
+          <div class="photo-controls-previous disbaled">&lt;-- Previous</div>
+        </lr:PreviousDisabled>
+        <div class="photo-controls-index"><a href="$gridPageLink">Back to $model.metadata.siteTitle.value</a></div>
+      </lr:Pagination>
+  </div>
+
+</div>
+<!--#include virtual="/inc/foot.shtml" -->

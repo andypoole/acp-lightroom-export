@@ -1,0 +1,181 @@
+return {
+	LrSdkVersion = 2.0,
+	LrSdkMinimumVersion = 2.0, -- minimum SDK version required by this plugin
+
+	title = "Andrew Poole",
+	id = "uk.org.andrewpoole.lightroom.webtemplates.acp", -- unique id for this plug-in
+	galleryType = "lua", -- lua or flash
+    maximumGallerySize = 99999,
+
+	model = {
+		
+		["metadata.siteTitle.value"] = "Album title",
+
+		["metadata.groupDescription.value"] = {
+			value = LOC "$$$/AgWPG/Templates/HTML/DefaultValues/ExampleGroupDescription=Insert album description here",
+			metadata = { ["ag:templateBehavior"] = "keepFromNil" },
+		},
+
+		["appearance.sitetitle.cssID"] = "#sitetitle",
+
+        ["lightroomApplication.useWatermark"] = true,
+        ["lightroomApplication.watermarkID"] = "",
+
+		["nonCSS.tracking"] = false,
+
+		["photoSizes.large.width"] = 1000, -- width of the large image as used in large.html
+		["photoSizes.large.height"] = 750, -- height of the large image as used in large.html
+		
+		["photoSizes.thumb.height"] = 150, -- height of the thumbnail image used in grid.html
+		["photoSizes.thumb.width"] = 150, -- width of the thumbnail image used in grid.html
+		["photoSizes.thumb.metadataExportMode"] = "copyright", -- add copyright to images when published
+		["appearance.thumb.cssID"] = ".thumb", -- CSS Id.  In grid.html the images with id 'thumb' will be set with the thumb.height and thumb.width defined above.
+		
+		["nonCSS.imageBase"] = "content",	-- when translated to html, the images will be in a root folder 'content'
+
+		["perImageSetting.title"] = {
+			enabled = true,
+			value = "{{com.adobe.title}}",
+			title = LOC "$$$/WPG/HTML/CSS/properties/ImageTitle=Title",
+		},
+
+		["perImageSetting.date"] = {
+			enabled = true,
+			value = "{{com.adobe.date}}",
+			title = LOC "$$$/WPG/HTML/CSS/properties/Date=Date",
+		},
+
+		["perImageSetting.caption"] = {
+			enabled = true,
+			value = "{{com.adobe.caption}}",
+			title = LOC "$$$/WPG/HTML/CSS/properties/ImageCaption=Caption",
+		},
+
+		["perImageSetting.location"] = {
+			enabled = true,
+			value = "{{com.adobe.location}}",
+			title = LOC "$$$/WPG/HTML/CSS/properties/Location=Location",
+		},
+
+		["perImageSetting.GPS"] = {
+			enabled = true,
+			value = "{{com.adobe.GPS}}",
+			title = LOC "$$$/WPG/HTML/CSS/properties/GPS=GPS",
+		},
+
+		["perImageSetting.focalLength"] = {
+			enabled = true,
+			value = "{{com.adobe.focalLength}}",
+			title = LOC "$$$/WPG/HTML/CSS/properties/FocalLength=Focal Length",
+		},
+
+		["perImageSetting.focalLength35mm"] = {
+			enabled = true,
+			value = "{{com.adobe.focalLength35mm}}",
+			title = LOC "$$$/WPG/HTML/CSS/properties/FocalLength35mm=Focal Length 35mm",
+		},
+
+		["perImageSetting.subjectDistance"] = {
+			enabled = true,
+			value = "{{com.adobe.subjectDistance}}",
+			title = LOC "$$$/WPG/HTML/CSS/properties/SubjectDistance=Subject Distance",
+		},
+
+		["perImageSetting.exposure"] = {
+			enabled = true,
+			value = "{{com.adobe.exposure}}",
+			title = LOC "$$$/WPG/HTML/CSS/properties/Exposure=Exposure",
+		},
+
+		["perImageSetting.exposureBiasValue"] = {
+			enabled = true,
+			value = "{{com.adobe.exposureBiasValue}}",
+			title = LOC "$$$/WPG/HTML/CSS/properties/ExposurBiasValue=ExposureBiasValue",
+		},
+
+		["perImageSetting.ISOSpeedRating"] = {
+			enabled = true,
+			value = "{{com.adobe.ISOSpeedRating}}",
+			title = LOC "$$$/WPG/HTML/CSS/properties/ISOSpeedRating=ISO Speed Rating",
+		},
+
+		["perImageSetting.flash"] = {
+			enabled = true,
+			value = "{{com.adobe.flash}}",
+			title = LOC "$$$/WPG/HTML/CSS/properties/Flash=Flash",
+		},
+
+		["perImageSetting.meteringMode"] = {
+			enabled = true,
+			value = "{{com.adobe.meteringMode}}",
+			title = LOC "$$$/WPG/HTML/CSS/properties/MeteringMode=Metering Mode",
+		},
+
+		["perImageSetting.make"] = {
+			enabled = true,
+			value = "{{com.adobe.make}}",
+			title = LOC "$$$/WPG/HTML/CSS/properties/Make=Make",
+		},
+
+		["perImageSetting.model"] = {
+			enabled = true,
+			value = "{{com.adobe.model}}",
+			title = LOC "$$$/WPG/HTML/CSS/properties/Model=Model",
+		},
+
+		["perImageSetting.software"] = {
+			enabled = true,
+			value = "{{com.adobe.software}}",
+			title = LOC "$$$/WPG/HTML/CSS/properties/Software=Software",
+		},
+
+		["perImageSetting.lens"] = {
+			enabled = true,
+			value = "{{com.adobe.lens}}",
+			title = LOC "$$$/WPG/HTML/CSS/properties/Lens=Lens",
+		},
+
+		["perImageSetting.imageFileDimensions"] = {
+			enabled = true,
+			value = "{{com.adobe.imageFileDimensions}}",
+			title = LOC "$$$/WPG/HTML/CSS/properties/ImageFileDimensions=ImageFileDimensions",
+		},
+
+		["perImageSetting.imageCroppedDimensions"] = {
+			enabled = true,
+			value = "{{com.adobe.imageCroppedDimensions}}",
+			title = LOC "$$$/WPG/HTML/CSS/properties/ImageCroppedDimensions=ImageCroppedDimensions",
+		},
+
+
+	},
+	
+	views = function( controller, f )
+		local LrView = import "LrView"
+		local bind = LrView.bind
+		local multibind = f.multibind
+		return {
+			labels = f:panel_content {
+				bindToObject = controller,
+				f:subdivided_sections {
+					f:labeled_text_input  {
+						title = "Gallery Title",
+						value = bind "metadata.siteTitle.value",
+					},
+					f:labeled_text_input  {
+						title = LOC "$$$/AgWPG/Templates/HTML/Panel/Labels/GroupDescription=Collection Description",
+						value = bind "metadata.groupDescription.value",
+					},
+
+				},
+			},
+			outputSettings = f:panel_content {
+				bindToObject = controller,
+				f:subdivided_sections {
+					f:watermark_section( controller ),
+				},
+			},
+		}
+	end,
+	
+}

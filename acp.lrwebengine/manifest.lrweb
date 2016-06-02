@@ -1,0 +1,13 @@
+importTags( "lr", "com.adobe.lightroom.default" )
+
+AddGridPages {
+	template="grid.html",
+	rows=99999,
+	columns=1,
+}
+
+AddPhotoPages {
+	template="large.html",
+	variant="_large",
+	destination="content",
+}

@@ -1,0 +1,73 @@
+
+<%
+     
+     local mySize = "thumb"
+     local others = "content"
+     local theRoot = "."
+     
+%>
+
+<!--#set var="pageTitle" value="$model.metadata.siteTitle.value" -->
+<!--#include virtual="/inc/head.shtml" -->
+<div id="container">
+<div class="photo-breadcrumb">
+<a href="/photos/">Photos</a> &gt; $model.metadata.siteTitle.value
+</div>
+<h1>$model.metadata.siteTitle.value</h1>
+
+<p>$model.metadata.groupDescription.value</p>
+
+
+<lr:ThumbnailGrid>
+	<lr:GridPhotoCell>
+          <div class="photo-thumbnail">
+            <div class="photo-thumbnail-image">
+              <a href="$others/<%= image.exportFilename %>_large.html">
+                <img src="$others/bin/images/thumb/<%= image.exportFilename %>.jpg" id="<%= image.imageID %>" class="thumb" />
+              </a>
+            </div>
+            <div class="photo-thumbnail-details">
+              <%
+                if(image.metadata.title == nil or image.metadata.title == '') then
+                  write("<b>" .. image.exportFilename .. "</b>")
+                else
+                  write("<b>" .. image.metadata.title .. "</b>")
+                end
+                %>
+                <br />
+                <i><%= image.metadata.date %></i>
+              </div>
+          </div>
+    </lr:GridPhotoCell>
+</lr:ThumbnailGrid>
+
+<% if numGridPages > 1 then %>
+  <div class="pagination">
+    <ul>
+      <lr:Pagination>
+        <lr:CurrentPage>
+          <li>$page</li>
+        </lr:CurrentPage>
+        <lr:OtherPages>
+          <li><a href="$link">$page</a></li>
+        </lr:OtherPages>
+	<lr:PreviousEnabled>
+	  <li><a href="$link">Previous</a></li>
+	</lr:PreviousEnabled>
+	<lr:PreviousDisabled>
+	  <li>Previous</li>
+	</lr:PreviousDisabled>
+	<lr:NextEnabled>
+	  <li><a href="$link">Next</a></li>
+	</lr:NextEnabled>
+	<lr:NextDisabled>
+	  <li>Next</li>
+	</lr:NextDisabled>
+      </lr:Pagination>
+    </ul>
+  </div>
+<% end %>
+
+</div>
+<div style="clear: both;"></div>
+<!--#include virtual="/inc/foot.shtml" -->
