@@ -5,6 +5,7 @@ This is a simple Lightroom web engine template plugin that will allow exporting 
 Installation is pretty straightforward.  Simply copy the acp.lrwebengine directory into your user's Web Galleries directory.  Usual locations for this are:
 
 Windows: `%APPDATA%\Adobe\Lightroom\Web Galleries`
+
 Mac OS: `~/Library/Application Support/Adobe/Lightroom/Web Galleries`
 
 # Usage
